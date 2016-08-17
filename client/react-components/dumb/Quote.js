@@ -6,11 +6,19 @@ class Quote extends React.Component {
     }
 
     render() {
-    	let {movie, qoute} = this.props.data
+    	let {movie, qoute, interested} = this.props.data
+        let {how_many, out_of, percentage} = interested
         return (
-        	<div>
+        	<p>
         		{movie.title} : {qoute}
-        	</div>
+                <br/>
+                {
+                    percentage?percentage.toFixed(1)+' '+how_many+"/"+out_of:''
+                }
+                <br/>
+                <span>Delete</span>
+                <span>Approve</span>
+        	</p>
         )
     }
 }

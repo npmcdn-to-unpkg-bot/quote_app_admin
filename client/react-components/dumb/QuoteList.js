@@ -14,7 +14,7 @@ class QuoteList extends React.Component {
         return (
         	<div>
         		{
-        			this.props.quotes.map(quote => <Quote key={quote.id} data={quote}/>)
+        			this.props.quotes.map(quote => <Quote key={quote._id} data={quote}/>)
         		}
         	</div>
         )

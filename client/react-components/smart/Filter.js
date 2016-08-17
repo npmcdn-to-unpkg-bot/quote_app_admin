@@ -21,6 +21,10 @@ class Filter extends React.Component {
         				this.props.titles.map(title => <option key={title}>{title}</option>)
         			}
         		</select>
+        		<input type='radio' name="status"/> Show Deleted
+        		<input type='radio' name="status"/> Show Approved
+        		<input type='radio' name="status"/> Show Not Reviewed
+
         	</div>
         );
     }
