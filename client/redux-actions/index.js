@@ -39,3 +39,11 @@ export const filterByStatus = (status) => {
 		status
 	}
 }
+
+export const updateStatus = (quote, status) => {
+	return {
+		type: "QUOTE_STATUS_UPDATED",
+		quote,
+		status
+	}
+}

@@ -14,7 +14,7 @@ class Quote extends React.Component {
     }
 
     render() {
-    	let {status, _id, movie, qoute, interested} = this.props.data
+    	let {movie, qoute, interested} = this.props.data
         let {how_many, out_of, percentage} = interested
         return (
         	<p>
@@ -25,10 +25,10 @@ class Quote extends React.Component {
                 }
                 <br/>
                 <button onClick={() => {
-                    this.props.data.status ='deleted'
+                    this.props.updateStatus(this.props.data, 'deleted')
                 }}>Delete</button>
                 <button onClick={() => {
-                    this.props.data.status = 'approved'
+                    this.props.updateStatus(this.props.data, 'approved')
                 }}>Approve</button>
         	</p>
         )

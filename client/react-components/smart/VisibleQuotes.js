@@ -1,6 +1,6 @@
 import QuoteList from '../dumb/QuoteList'
 import { connect } from 'react-redux'
-import { getQuotes } from '../../redux-actions'
+import { getQuotes, updateStatus } from '../../redux-actions'
 
 const visibleQuotes = (quotes, filter) => {
 	const check = (q) => {
@@ -27,6 +27,9 @@ const mapDispatchProps = (dispatch) => {
 		getQuotes: () => {
 			dispatch(getQuotes())
 		},
+		updateStatus: (quote, status) => {
+			dispatch(updateStatus(quote, status))
+		}
 	}
 }
 
