@@ -3,7 +3,17 @@ import { connect } from 'react-redux'
 import { getQuotes } from '../../redux-actions'
 
 const visibleQuotes = (quotes, filter) => {
-	return quotes.filter(q => q.movie.title == filter)
+	const check = (q) => {
+		if (q.movie.title != filter.title)
+			return false
+		if (filter.status == 'all')
+			return true
+		if (filter.status == 'deleted' || filter.status == 'approved')
+			return filter.status == q.status
+		if (filter.status == 'not-reviewed')
+			return q.status != 'deleted' && q.status != 'approved'
+	}
+	return quotes.filter(q => check(q))
 }
 
 const mapStateProps = (state) => {

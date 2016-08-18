@@ -26,9 +26,16 @@ export const getTitles = () => {
 	}
 }
 
-export const filterBy = (title) => {
+export const filterByTitle = (title) => {
 	return {
 		type: "FILTER_BY_TITLE",
 		title
+	}
+}
+
+export const filterByStatus = (status) => {
+	return {
+		type: 'FILTER_BY_STATUS',
+		status
 	}
 }
