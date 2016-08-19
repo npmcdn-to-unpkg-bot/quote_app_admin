@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { getTitles, filterByTitle, filterByStatus } from '../../redux-actions'
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar'
+import DropDownMenu from 'material-ui/DropDownMenu'
 
 class Filter extends React.Component {
     constructor(props) {
@@ -10,33 +15,47 @@ class Filter extends React.Component {
     componentDidMount() {
     	this.props.getTitles()
     }
-
-    statusFilterChanged(e) {
-        this.props.filterByStatus(e.currentTarget.value)
+    
+    handleChangeTitle(event, index, value) {
+        this.props.filterByTitle(value)
     }
 
+    handleChangeStatus(event, index, value) {
+        this.props.filterByStatus(value)
+    }
+    
     render() {
+        const items = this.props.titles.map((title) => {
+            return {
+                text: title,
+            }
+        })
         return (
-        	<div>
-        		<select onChange={(e) => {
-        			this.props.filterByTitle(e.target.value)
-        		}}>
-        			{
-        				this.props.titles.map(title => <option key={title}>{title}</option>)
-        			}
-        		</select>
-        		<input type='radio' value='deleted' name="status" onChange={this.statusFilterChanged.bind(this)}/> Show Deleted
-        		<input type='radio' value='approved' name="status" onChange={this.statusFilterChanged.bind(this)}/> Show Approved
-        		<input type='radio' value='not-reviewed' name="status" onChange={this.statusFilterChanged.bind(this)}/> Show Not Reviewed
-                <input type='radio' value='all' name="status" onChange={this.statusFilterChanged.bind(this)} defaultChecked/> Show All
-        	</div>
+            <Toolbar className="filter">
+                <ToolbarGroup>
+                    <DropDownMenu value={this.props.value} onChange={this.handleChangeTitle.bind(this)}>
+                        {
+                            this.props.titles.map(title => <MenuItem value={title} primaryText={title} />)
+                        }
+                    </DropDownMenu>
+
+                    <DropDownMenu value={this.props.status} onChange={this.handleChangeStatus.bind(this)}>
+                        <MenuItem value="all" primaryText="Show All" />
+                        <MenuItem value="not-reviewed" primaryText="Show Not Reviewed" />
+                        <MenuItem value="approved" primaryText="Show Approved" />
+                        <MenuItem value="deleted" primaryText="Show Deleted" />
+                    </DropDownMenu>
+                </ToolbarGroup>
+            </Toolbar>
         );
     }
 }
 
 const mapStateProps = (state) => {
 	return {
-		titles: state.titles
+		titles: state.titles,
+        value: state.filter.title,
+        status: state.filter.status
 	}
 }
 

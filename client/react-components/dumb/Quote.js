@@ -1,4 +1,7 @@
 import React from 'react'
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
+
 
 class Quote extends React.Component {
     constructor(props) {
@@ -17,28 +20,28 @@ class Quote extends React.Component {
     	let {status, movie, qoute, interested} = this.props.data
         let {how_many, out_of, percentage} = interested
         return (
-        	<p>
-        		{movie.title} : {qoute}
-                <br/>
-                {
-                    percentage?percentage.toFixed(1)+' '+how_many+"/"+out_of:''
-                }
-                <br/>
-                {
-                    status != 'deleted' ?
-                        <button onClick={() => {
-                            this.props.updateStatus(this.props.data, 'deleted')
-                        }}>Delete</button>
-                    :''
-                }
-                {
-                    status != 'approved' ?
-                        <button onClick={() => {
-                            this.props.updateStatus(this.props.data, 'approved')
-                        }}>Approve</button>
-                    :''
-                }
-        	</p>
+        	<Card className="quote">
+                <CardHeader
+                    title={qoute}
+                    subtitle={percentage?percentage.toFixed(1)+' '+how_many+"/"+out_of:''}
+                    />  
+                <CardActions>
+                    {
+                      status != 'deleted' ?
+                          <FlatButton onClick={() => {
+                              this.props.updateStatus(this.props.data, 'deleted')
+                          }} label="Delete" />
+                      :''
+                    }
+                    {
+                      status != 'approved' ?
+                          <FlatButton onClick={() => {
+                              this.props.updateStatus(this.props.data, 'approved')
+                          }} label="Approve" />
+                      :''
+                    }
+                </CardActions>
+        	</Card>
         )
     }
 }
