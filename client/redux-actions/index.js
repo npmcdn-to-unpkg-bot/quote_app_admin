@@ -41,9 +41,17 @@ export const filterByStatus = (status) => {
 }
 
 export const updateStatus = (quote, status) => {
-	return {
-		type: "QUOTE_STATUS_UPDATED",
-		quote,
-		status
+	
+	return (dispatch) => {
+		fetch('/api/quote/' + quote._id + '/' + status, {
+			method: 'POST'
+		}).then(res => {
+			dispatch({
+				type: "QUOTE_STATUS_UPDATED",
+				quote,
+				status
+			})
+		})
 	}
+	
 }

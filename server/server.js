@@ -1,9 +1,17 @@
 import express from 'express'
 import mongojs from 'mongojs'
 import { mongoPath, collection } from './credentials'
+import { ObjectId } from 'mongodb' 
 
 const db = mongojs(mongoPath, [collection])
 const app = express()
+
+app.post('/api/quote/:id/:status', (req, res) => {
+	db.imdb.update({_id: ObjectId(req.params.id)}, 
+		{$set: {status: req.params.status}}, {}, (err, doc) => {
+			res.status(200).send({msg:"Status updated"})
+		})
+})
 
 app.get('/api/titles', (req, res) => {
 	db.imdb.distinct("movie.title", {}, (err, arr) => {
