@@ -7,7 +7,7 @@ class QuoteList extends React.Component {
     }
 
     componentDidMount() {
-    	this.props.getQuotes()
+    	//this.props.getQuotes()
     }
 
     render() {

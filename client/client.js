@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 import React from 'react'
 import thunk from 'redux-thunk'
+//import createLogger from 'redux-logger'
 import ReactDOM from 'react-dom';
 import App from './react-components/dumb/App'
 import { createStore, applyMiddleware  } from 'redux'
@@ -11,6 +12,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+ 
+//const logger = createLogger()
 let store = createStore(
 	reducers,
 	applyMiddleware(thunk)
@@ -23,6 +26,6 @@ ReactDOM.render(
 	  		<App/>
 	  	</MuiThemeProvider>
 	  </Provider>,
-	
+
   document.getElementById('root')
 );

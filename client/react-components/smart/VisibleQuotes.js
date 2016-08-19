@@ -2,15 +2,13 @@ import QuoteList from '../dumb/QuoteList'
 import { connect } from 'react-redux'
 import { getQuotes, updateStatus } from '../../redux-actions'
 
-const visibleQuotes = (quotes, filter) => {
+const filterByStatus = (quotes, status) => {
 	const check = (q) => {
-		if (q.movie.title != filter.title)
-			return false
-		if (filter.status == 'all')
+		if (status == 'all')
 			return true
-		if (filter.status == 'deleted' || filter.status == 'approved')
-			return filter.status == q.status
-		if (filter.status == 'not-reviewed')
+		if (status == 'deleted' || status == 'approved')
+			return status == q.status
+		if (status == 'not-reviewed')
 			return q.status != 'deleted' && q.status != 'approved'
 	}
 	return quotes.filter(q => check(q))
@@ -18,7 +16,7 @@ const visibleQuotes = (quotes, filter) => {
 
 const mapStateProps = (state) => {
 	return {
-		quotes: visibleQuotes(state.quotes, state.filter)
+		quotes: filterByStatus(state.quotes.visible, state.filter.status)
 	}
 }
 
