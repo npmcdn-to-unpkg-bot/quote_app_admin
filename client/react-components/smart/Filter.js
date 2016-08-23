@@ -22,7 +22,6 @@ class Filter extends React.Component {
         } else {
             this.props.filterByTitle(value)
         }
-        
     }
 
     handleChangeStatus(event, index, value) {

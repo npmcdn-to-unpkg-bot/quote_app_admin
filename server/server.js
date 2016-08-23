@@ -19,7 +19,7 @@ app.post('/api/quote/:id/:status', (req, res) => {
 
 app.get('/api/titles', (req, res) => {
 	db.imdb.distinct("movie.title", {}, (err, arr) => {
-		res.status(200).json(arr)
+		res.status(200).json(arr.sort())
 	})
 })
 
